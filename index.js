@@ -17,7 +17,7 @@ class PluckPush extends Worker {
     }
     var pluck = pluckMatch.exec(req.paths[req.currentIdx]);
     if(pluck){
-      var val = jsonPath(inputVal, pluck[1]);
+      var val = jsonPath.query(inputVal, pluck[1]);
     } else {
       val = inputVal;
     }
