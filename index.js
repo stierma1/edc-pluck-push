@@ -24,7 +24,7 @@ class PluckPush extends Worker {
 
     var push = pushMatch.exec(req.paths[req.currentIdx]);
     if(push){
-      var spl = push.split(".");
+      var spl = push[1].split(".");
       var current = req.body;
       for(var i = 1; i < spl.length-1; i++){
         if(!current[spl[i]]){
