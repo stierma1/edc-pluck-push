@@ -4,6 +4,7 @@ var Worker = require("basic-distributed-computation").Worker;
 var jsonPath = require("jsonPath");
 var pluckMatch = /_pluck\/\{([a-z\.A-Z0-9\/\:\-\@\[\]\?\(\)\*\,\&\|\ \=\"\n\t\r\\\$\>\<\'\!\~\#\%\^\+\_]+)\}/;
 var pushMatch = /_push\/{(\$(\.[a-zA-Z0-9\:\-\_\#\@\$]+)+)+\}/;
+var grabFirstMatch = /_grab_first\/{true}/
 
 class PluckPush extends Worker {
   constructor(parent){
@@ -20,6 +21,11 @@ class PluckPush extends Worker {
       var val = jsonPath.query(inputVal, pluck[1]);
     } else {
       val = inputVal;
+    }
+
+    var grabFirst = grabFirstMatch.exec(req.paths[req.currentIdx]);
+    if(grapFirst){
+      val = val[0];
     }
 
     var push = pushMatch.exec(req.paths[req.currentIdx]);
